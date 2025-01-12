@@ -29,11 +29,13 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # USER mambauser
 
-# Copy the yaml file to your docker image and pass it to micromamba
+# Copy the yaml file to your docker image and pass it to micromamba to install dependencies
 COPY --chown=$MAMBA_USER:$MAMBA_USER scaleMethylTools.conda.yml /tmp/scaleMethylTools.conda.yml
 RUN micromamba install -y -n base -f /tmp/scaleMethylTools.conda.yml && \
     micromamba clean --all --yes
-# ENV PATH="/opt/conda/envs/scaleMethylTools/bin:${PATH}" # not needed if installing to base env?
+# Add to path - modify if installing to base env rather than named env:
+#ENV PATH="/opt/conda/envs/scaleMethylTools/bin:${PATH}"
+ENV PATH="/opt/conda/bin/:${PATH}"
 
 COPY --chown=$MAMBA_USER:$MAMBA_USER download-scale-tools.sh /tmp/download-scale-tools.sh
 RUN mkdir /tools && sh /tmp/download-scale-tools.sh /tools
