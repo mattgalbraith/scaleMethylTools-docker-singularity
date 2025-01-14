@@ -5,7 +5,7 @@ FROM --platform=linux/amd64 mambaorg/micromamba:1.5.10-noble
 # The 'base' conda environment is automatically activated when the image is running.
 
 ################## METADATA ######################
-LABEL base_image="mambaorg/micromamba:1.3.1-focal"
+LABEL base_image="mambaorg/micromamba:1.5.10-noble"
 LABEL version="0.1"
 LABEL software="scaleMethylTools"
 LABEL software.version=""
